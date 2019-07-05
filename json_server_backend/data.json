@@ -1,0 +1,89 @@
+{
+    "stockwerke" : 
+    [
+        {
+            "stockwerk": "1.OG",
+            "raeume": 
+            [
+                {
+                    "nummer": "1.2",
+                    "presentation": {
+                        "x":0,
+                        "y":0,
+                        "length": 5,
+                        "width":2,
+                        "walls": {
+                            "north": "eInsideWallSimple",
+                            "south": "eOutsideWallWindow1",
+                            "east": "eInsideWallDoor",
+                            "west": "eOusideWallWindow2",
+                            "floor": "eFloor",
+                            "ceiling": "eCeiling"
+                        }
+                    },
+                    "personen": 
+                    [
+                        {
+                            "name": "Bill Gates",
+                            "login": "blgates",
+                            "telefon": "0"
+                        }
+                    ],
+                    
+                    "attribute": 
+                    [
+                        {
+                            "temperatur": "21.5"
+                        }
+                    ]
+                },
+                {
+                    "nummer": "Flur",
+                    "presentation": {
+                        "x": 2, 
+                        "y": 2, 
+                        "length": 1,
+                        "width": 2,
+                        "walls": {
+                            "north": "eNone",
+                            "south": "eOutsideWallWindow1",
+                            "east": "eNone",
+                            "west": "eNone"
+                        }
+                    },
+                    "personen": [],
+                    "inventar": 
+                    [
+                        {
+                            "name": "1OG-Canon"
+                        }
+                    ],
+                    "attribute": 
+                    [
+                        {
+                            "temperatur": "18.1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "stockwerk": "2.OG",
+            "raeume": 
+            [
+                {
+                    "nummer": "2.OG Besprechungsraum",
+                    "personen": [],
+                    "inventar": [],
+                    "attribute": 
+                    [
+                        {
+                            "telefon": "13",
+                            "temperatur": "25.1"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
