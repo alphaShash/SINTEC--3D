@@ -44,10 +44,9 @@ export class WallFactoryService {
         { shape: rearWallData, depth: 0.1, faceUV: rearFaceUV },
         scene
       );
+      rearWall.position = new this.BABYLON.Vector3(0, 2, 10);
       rearWall.rotation.x = -Math.PI / 2;
-      rearWall.position.z = 10;
-      rearWall.position.y = 2;
-      rearWall.material = wallmat;
+      // rearWall.material = wallmat;
       return rearWall;
     } else if (wallType == EWallType.eOusideWallWindow2) {
       var frontWallData = [
@@ -89,17 +88,17 @@ export class WallFactoryService {
         scene
       );
       frontWall.rotation.x = Math.PI / 2;
-      frontWall.position.y = 1;
-      frontWall.material = wallmat;
+      frontWall.position = new this.BABYLON.Vector3(0, 1, 0);
+      // frontWall.material = wallmat;
       return frontWall;
     } else if (wallType == EWallType.eInsideWallSimple) {
       var rightWallData = [
-        new this.BABYLON.Vector3(-param1, 0, -3),
-        new this.BABYLON.Vector3(param1, 0, -3),
-        new this.BABYLON.Vector3(param1, 0, 2),
+        new this.BABYLON.Vector3(-5, 0, -3),
+        new this.BABYLON.Vector3(5, 0, -3),
+        new this.BABYLON.Vector3(5, 0, 2),
         new this.BABYLON.Vector3(3.1, 0, 2),
         new this.BABYLON.Vector3(0, 0, 2),
-        new this.BABYLON.Vector3(-param1, 0, 2)
+        new this.BABYLON.Vector3(-5, 0, 2)
       ];
       var rightFaceUV = new Array(3);
       rightFaceUV[2] = new this.BABYLON.Vector4(7 / 15, 0, 14 / 15, 1);
@@ -119,19 +118,17 @@ export class WallFactoryService {
       );
       rightWall.rotation.z = Math.PI / 2;
       rightWall.rotation.x = -Math.PI / 2;
-      rightWall.position.x = -5;
-      rightWall.position.z = 5;
-      rightWall.position.y = 2;
-      rightWall.material = wallmat;
+      rightWall.position = new this.BABYLON.Vector3(-5, 2, 5);
+      // rightWall.material = wallmat;
       return rightWall;
     } else if (wallType == EWallType.eOutsideWallWindow1) {
       var leftWallData = [
-        new this.BABYLON.Vector3(-param1, 0, -3),
-        new this.BABYLON.Vector3(param1, 0, -3),
-        new this.BABYLON.Vector3(param1, 0, 2),
+        new this.BABYLON.Vector3(-5, 0, -3),
+        new this.BABYLON.Vector3(5, 0, -3),
+        new this.BABYLON.Vector3(5, 0, 2),
         new this.BABYLON.Vector3(3.1, 0, 2),
         new this.BABYLON.Vector3(0, 0, 2),
-        new this.BABYLON.Vector3(-param1, 0, 2)
+        new this.BABYLON.Vector3(-5, 0, 2)
       ];
 
       var sideWindowHoles = [];
@@ -165,10 +162,8 @@ export class WallFactoryService {
       );
       leftWall.rotation.z = -Math.PI / 2;
       leftWall.rotation.x = -Math.PI / 2;
-      leftWall.position.x = 5;
-      leftWall.position.z = 5;
-      leftWall.position.y = 2;
-      leftWall.material = wallmat;
+      leftWall.position = new this.BABYLON.Vector3(5, 2, 5);
+      // leftWall.material = wallmat;
       return leftWall;
     } else if (wallType == EWallType.eFloor) {
       var firstfloorData = [
@@ -189,8 +184,7 @@ export class WallFactoryService {
         { shape: firstfloorData, depth: 0.1, faceUV: floorFaceUV },
         scene
       );
-      floor.position.y = -0.9;
-      floor.position.z = -0.1;
+      floor.position = new this.BABYLON.Vector3(0, -0.9, -0.1);
       return floor;
     } else {
       var ceilingData = [
@@ -207,9 +201,8 @@ export class WallFactoryService {
         { shape: ceilingData, depth: 0.1 },
         scene
       );
-      ceiling.position.y = 3.9;
-      ceiling.position.z = -0.1;
-      ceiling.material = wallmat;
+      ceiling.position = new this.BABYLON.Vector3(0, 3.9, -0.1);
+      // ceiling.material = wallmat;
       return ceiling;
 
       var wallmat = new this.BABYLON.StandardMaterial("wallmaterial", scene);
