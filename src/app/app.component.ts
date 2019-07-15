@@ -48,49 +48,26 @@ export class AppComponent implements OnInit {
     this.roomService.getStockwerk("1.OG").subscribe(
       stockwerk => {
         stockwerk.raeume.forEach(room => {
+
+          var SPS = new this.BABYLON.SolidParticleSystem('SPS', scene);
+
           var rearWall = this.wallFactory.createWall(scene,EWallType.eInsideWallDoor, room.presentation.length, room.presentation.width );
           var frontWall = this.wallFactory.createWall(scene, EWallType.eOusideWallWindow2, room.presentation.length, room.presentation.width);
           var rightWall = this.wallFactory.createWall(scene, EWallType.eInsideWallSimple, room.presentation.length, room.presentation.width );
           var leftWall = this.wallFactory.createWall(scene, EWallType.eOutsideWallWindow1, room.presentation.length, room.presentation.width );
           var floor = this.wallFactory.createWall(scene, EWallType.eFloor, room.presentation.length, room.presentation.width);
           var ceiling = this.wallFactory.createWall(scene, EWallType.eCeiling, room.presentation.length, room.presentation.width );
-
-          var pilot = this.BABYLON.Mesh.MergeMeshes([rearWall, frontWall, rightWall, leftWall, floor, ceiling]);
-          pilot.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0);
+    
+          var pilot = new this.BABYLON.Mesh.MergeMeshes([rearWall, frontWall, rightWall, leftWall, floor, ceiling], true, true, undefined,true);
+          // pilot.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z);
         });
+        
       },
       errors => {
         console.log(errors);
         alert("Fail to load room data");
       }
     );
-     
-    
-    // rearWall.position = this.this.BABYLON.Vector3.TransformCoordiniates(room.presentation.x, room.presentation.y,0);
-          // rearWall.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 10);
-          // rearWall.locallyTranslate(new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0));
-          // TODO: rotate depends on north/south/east/west
-            // frontWall.position = this.BABYLON.Vector3.TransformCoordiniates(room.presentation.x, room.presentation.y,0);
-          // frontWall.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0);
-          // frontWall.locallyTranslate(new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0));#
-
-             // rightWall.position = this.BABYLON.Vector3.TransformCoordiniates(room.presentation.x, room.presentation.y,0);
-          //       rightWall.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0);
-          // rightWall.locallyTranslate(new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0));
-
-           // leftWall.position = this.BABYLON.Vector3.TransformCoordiniates(room.presentation.x, room.presentation.y,0);
-          //       leftWall.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0);
-          // leftWall.locallyTranslate(new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0));
-
-           // floor.position = this.BABYLON.Vector3.TransformCoordiniates(room.presentation.x, room.presentation.y,0);
-          //       floor.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0);
-          // floor.locallyTranslate(new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0));
-
-          // ceiling.position = this.BABYLON.Vector3.TransformCoordiniates(room.presentation.x, room.presentation.y,0);
-          //       ceiling.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0);
-          // ceiling.locallyTranslate(new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, 0));
-
-
     // var windowFTUM = this.wallFactory.windowMaker(4.15, 2, 4, 0.15, 0.1);
     // windowFTUM.position.x = -2.15;
     // windowFTUM.position.y = 0.3;
@@ -136,42 +113,4 @@ export class AppComponent implements OnInit {
     // var light2 = new this.BABYLON.PointLight("light2", new this.BABYLON.Vector3(0, 1, -1), scene);
     return scene;
   }
-
-  // localAxes(scene, size) {
-  //   let internalBabylon = this.BABYLON
-
-  //   var makeTextPlane = function (text, color, size) {
-  //     var dynamicTexture = new internalBabylon.DynamicTexture("DynamicTexture", 50, scene, true);
-  //     dynamicTexture.hasAlpha = true;
-  //     dynamicTexture.drawText(text, 5, 40, "bold 36px Arial", color, "transparent", true);
-  //     var plane = internalBabylon.Mesh.CreatePlane("TextPlane", size, scene, true);
-  //     plane.material = new internalBabylon.StandardMaterial("TextPlaneMaterial", scene);
-  //     plane.material.backFaceCulling = false;
-  //     plane.material.specularColor = new internalBabylon.Color3(0, 0, 0);
-  //     plane.material.diffuseTexture = dynamicTexture;
-  //     return plane;
-  //   };
-  //   var axisX = this.BABYLON.Mesh.CreateLines("axisX", [
-  //     this.BABYLON.Vector3.Zero(), new this.BABYLON.Vector3(size, 0, 0), new this.BABYLON.Vector3(size * 0.95, 0.05 * size, 0),
-  //     new this.BABYLON.Vector3(size, 0, 0), new this.BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
-  //   ], scene);
-  //   axisX.color = new this.BABYLON.Color3(1, 0, 0);
-  //   var xChar = makeTextPlane("X", "red", size / 10);
-  //   xChar.position = new this.BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
-  //   var axisY = this.BABYLON.Mesh.CreateLines("axisY", [
-  //     this.BABYLON.Vector3.Zero(), new this.BABYLON.Vector3(0, size, 0), new this.BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
-  //     new this.BABYLON.Vector3(0, size, 0), new this.BABYLON.Vector3(0.05 * size, size * 0.95, 0)
-  //   ], scene);
-  //   axisY.color = new this.BABYLON.Color3(0, 1, 0);
-  //   var yChar = makeTextPlane("Y", "green", size / 10);
-  //   yChar.position = new this.BABYLON.Vector3(0, 0.9 * size, -0.05 * size);
-  //   var axisZ = this.BABYLON.Mesh.CreateLines("axisZ", [
-  //     this.BABYLON.Vector3.Zero(), new this.BABYLON.Vector3(0, 0, size), new this.BABYLON.Vector3(0, -0.05 * size, size * 0.95),
-  //     new this.BABYLON.Vector3(0, 0, size), new this.BABYLON.Vector3(0, 0.05 * size, size * 0.95)
-  //   ], scene);
-  //   axisZ.color = new this.BABYLON.Color3(0, 0, 1);
-  //   var zChar = makeTextPlane("Z", "blue", size / 10);
-  //   zChar.position = new this.BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
-  // };
-
 }
