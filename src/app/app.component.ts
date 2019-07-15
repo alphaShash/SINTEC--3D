@@ -57,9 +57,9 @@ export class AppComponent implements OnInit {
           var leftWall = this.wallFactory.createWall(scene, EWallType.eOutsideWallWindow1, room.presentation.length, room.presentation.width );
           var floor = this.wallFactory.createWall(scene, EWallType.eFloor, room.presentation.length, room.presentation.width);
           var ceiling = this.wallFactory.createWall(scene, EWallType.eCeiling, room.presentation.length, room.presentation.width );
-    
-          var pilot = new this.BABYLON.Mesh.MergeMeshes([rearWall, frontWall, rightWall, leftWall, floor, ceiling], true, true, undefined,true);
-          pilot.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z);
+
+          var mesh = new this.BABYLON.Mesh.MergeMeshes([rearWall, frontWall, rightWall, leftWall, floor, ceiling], true, true, undefined,true);
+          mesh.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z);
         });
         
       },
