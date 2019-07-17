@@ -41,14 +41,14 @@ export class WallFactoryService {
 
       var rearWall = this.BABYLON.MeshBuilder.ExtrudePolygon(
         "east",
-        { shape: rearWallData, depth: 0.1, faceUV: rearFaceUV },
+        { shape: rearWallData, depth: 0.1, faceUV: rearFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
         scene
       );
       rearWall.position = new this.BABYLON.Vector3(0, 2, 10);
       rearWall.rotation.x = -Math.PI / 2;
       // rearWall.material = wallmat;
       return rearWall;
-    } else if (wallType == EWallType.eOusideWallWindow2) {
+    } else if (wallType == EWallType.eOutsideWallWindow2) {
       var frontWallData = [
         // rear wall with 3 windows
         new this.BABYLON.Vector3(-param1, 0, -3),
@@ -83,7 +83,8 @@ export class WallFactoryService {
           shape: frontWallData,
           depth: 0.15,
           holes: frontWindow1Holes,
-          faceUV: frontFaceUV
+          faceUV: frontFaceUV,
+          sideOrientation: this.BABYLON.Mesh.DOUBLESIDE 
         },
         scene
       );
@@ -91,7 +92,8 @@ export class WallFactoryService {
       frontWall.position = new this.BABYLON.Vector3(0, 1, 0);
       // frontWall.material = wallmat;
       return frontWall;
-    } else if (wallType == EWallType.eInsideWallSimple) {
+    }
+    else if (wallType == EWallType.eInsideWallSimple) {
       var rightWallData = [
         new this.BABYLON.Vector3(-5, 0, -3),
         new this.BABYLON.Vector3(5, 0, -3),
@@ -113,7 +115,7 @@ export class WallFactoryService {
 
       var rightWall = this.BABYLON.MeshBuilder.ExtrudePolygon(
         "north",
-        { shape: rightWallData, depth: 0.1, faceUV: rightFaceUV },
+        { shape: rightWallData, depth: 0.1, faceUV: rightFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
         scene
       );
       rightWall.rotation.z = Math.PI / 2;
@@ -156,7 +158,8 @@ export class WallFactoryService {
           shape: leftWallData,
           depth: 0.1,
           holes: sideWindowHoles,
-          faceUV: leftFaceUV
+          faceUV: leftFaceUV,
+          sideOrientation: this.BABYLON.Mesh.DOUBLESIDE 
         },
         scene
       );
@@ -181,7 +184,7 @@ export class WallFactoryService {
 
       var floor = this.BABYLON.MeshBuilder.ExtrudePolygon(
         "floor",
-        { shape: firstfloorData, depth: 0.1, faceUV: floorFaceUV },
+        { shape: firstfloorData, depth: 0.1, faceUV: floorFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
         scene
       );
       floor.position = new this.BABYLON.Vector3(0, -0.9, -0.1);
@@ -198,7 +201,7 @@ export class WallFactoryService {
 
       var ceiling = this.BABYLON.MeshBuilder.ExtrudePolygon(
         "ceiling",
-        { shape: ceilingData, depth: 0.1 },
+        { shape: ceilingData, depth: 0.1, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
         scene
       );
       ceiling.position = new this.BABYLON.Vector3(0, 3.9, -0.1);

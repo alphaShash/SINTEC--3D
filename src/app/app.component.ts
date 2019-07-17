@@ -49,17 +49,15 @@ export class AppComponent implements OnInit {
       stockwerk => {
         stockwerk.raeume.forEach(room => {
 
-          var SPS = new this.BABYLON.SolidParticleSystem('SPS', scene);
-
           var rearWall = this.wallFactory.createWall(scene,EWallType.eInsideWallDoor, room.presentation.length, room.presentation.width );
-          var frontWall = this.wallFactory.createWall(scene, EWallType.eOusideWallWindow2, room.presentation.length, room.presentation.width);
+          var frontWall = this.wallFactory.createWall(scene, EWallType.eOutsideWallWindow2, room.presentation.length, room.presentation.width);
           var rightWall = this.wallFactory.createWall(scene, EWallType.eInsideWallSimple, room.presentation.length, room.presentation.width );
           var leftWall = this.wallFactory.createWall(scene, EWallType.eOutsideWallWindow1, room.presentation.length, room.presentation.width );
           var floor = this.wallFactory.createWall(scene, EWallType.eFloor, room.presentation.length, room.presentation.width);
           var ceiling = this.wallFactory.createWall(scene, EWallType.eCeiling, room.presentation.length, room.presentation.width );
 
           var mesh = new this.BABYLON.Mesh.MergeMeshes([rearWall, frontWall, rightWall, leftWall, floor, ceiling], true, true, undefined,true);
-          mesh.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z);
+          mesh.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y,0);
         });
         
       },
