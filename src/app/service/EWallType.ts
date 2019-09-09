@@ -4,5 +4,5 @@ export const enum EWallType {
     eInsideWallDoor = "eInsideWallDoor",
     eOutsideWallWindow2 = "eOutsideWallWindow2",
     eFloor = "eFloor",
-    eCeiling = "eCeiling"
+    eCeiling = "eCeiling",
 }

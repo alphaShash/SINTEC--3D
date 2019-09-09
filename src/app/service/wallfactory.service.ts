@@ -16,159 +16,167 @@ export class WallFactoryService {
     param1: number,
     param2: number
   ): any {
+
+    //---------------rearWall data with door------------------------
     if (wallType == EWallType.eInsideWallDoor) {
       var rearWallData = [
         new this.BABYLON.Vector3(-param1, 0, -3),
-        // new this.BABYLON.Vector3(5.5, 0, -3),
-        new this.BABYLON.Vector3(-0.5, 0, -3), // rear door
+        // new this.BABYLON.Vector3(4.5, 0, -3),
+        new this.BABYLON.Vector3(-0.5, 0, -3),	// rear door
         new this.BABYLON.Vector3(-0.5, 0, -0.75), // rear door
         new this.BABYLON.Vector3(0.5, 0, -0.75), // rear door
-        new this.BABYLON.Vector3(0.5, 0, -3), // rear door
+        new this.BABYLON.Vector3(0.5, 0, -3),	// rear door
         new this.BABYLON.Vector3(param1, 0, -3),
-        new this.BABYLON.Vector3(param1, 0, 2),
-        new this.BABYLON.Vector3(-param1, 0, 2)
+        new this.BABYLON.Vector3(param1, 0, 1),
+        new this.BABYLON.Vector3(-param1, 0, 1)
       ];
-      var rearFaceUV = new Array(3);
+    
+      var rearFaceUV = [];
       rearFaceUV[0] = new this.BABYLON.Vector4(7 / 15, 0, 14 / 15, 1);
       rearFaceUV[1] = new this.BABYLON.Vector4(14 / 15, 0, 1, 1);
       rearFaceUV[2] = new this.BABYLON.Vector4(0, 0, 7 / 15, 1);
 
-      var wallmat = new this.BABYLON.StandardMaterial("wallmaterial", scene);
-      wallmat.diffuseTexture = new this.BABYLON.Texture(
+      var wallmat1 = new this.BABYLON.StandardMaterial("wallmaterial", scene);
+      wallmat1.diffuseTexture = new this.BABYLON.Texture(
         "http://i.imgur.com/2b1C7UH.jpg",
         scene
       );
-
-      var rearWall = this.BABYLON.MeshBuilder.ExtrudePolygon(
+    
+      var rearWall = this.BABYLON.MeshBuilder.CreatePolygon(
         "east",
-        { shape: rearWallData, depth: 0.1, faceUV: rearFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
+        {
+          shape: rearWallData,
+          depth: 0.1,
+          faceUV: rearFaceUV,
+          sideOrientation: this.BABYLON.Mesh.DOUBLESIDE
+        },
         scene
       );
-      rearWall.position = new this.BABYLON.Vector3(0, 2, 10);
       rearWall.rotation.x = -Math.PI / 2;
-      // rearWall.material = wallmat;
+      rearWall.position = new this.BABYLON.Vector3(0, 1, 9.15);
+      rearWall.material = wallmat1;
       return rearWall;
-    } else if (wallType == EWallType.eOutsideWallWindow2) {
-      var frontWallData = [
-        // rear wall with 3 windows
+    } 
+
+    //-----------------frontwall data with window-------------------------
+    else if (wallType == EWallType.eOutsideWallWindow2) {
+      var frontWall1Data = [
         new this.BABYLON.Vector3(-param1, 0, -3),
         new this.BABYLON.Vector3(-4.3, 0, -3),
         new this.BABYLON.Vector3(-0.5, 0, -3),
         new this.BABYLON.Vector3(param1, 0, -3),
-        new this.BABYLON.Vector3(param1, 0, 2),
-        new this.BABYLON.Vector3(-param1, 0, 2)
+        new this.BABYLON.Vector3(param1, 0, 1),
+        new this.BABYLON.Vector3(-param1, 0, 1)
       ];
-
+    
       var frontWindow1Holes = [];
       frontWindow1Holes[0] = [
-        new this.BABYLON.Vector3(-4.15, 0, -1.8),
-        new this.BABYLON.Vector3(4, 0, -1.8),
-        new this.BABYLON.Vector3(4, 0, 1),
-        new this.BABYLON.Vector3(-4.15, 0, 1)
+        new this.BABYLON.Vector3(-2.15, 0, -2.3),
+        new this.BABYLON.Vector3(2, 0, -2.3),
+        new this.BABYLON.Vector3(2, 0, -0.3),
+        new this.BABYLON.Vector3(-2.15, 0, -0.3)
       ];
-      var frontFaceUV = [];
-      frontFaceUV[0] = new this.BABYLON.Vector4(7 / 15, 0, 14 / 15, 1);
-      frontFaceUV[1] = new this.BABYLON.Vector4(14 / 15, 0, 1, 1);
-      frontFaceUV[2] = new this.BABYLON.Vector4(0, 0, 7 / 15, 1);
+    
+      var faceUV = new Array(3);
+      faceUV[0] = new this.BABYLON.Vector4(0, 0, 7 / 15, 1);
 
-      var wallmat = new this.BABYLON.StandardMaterial("wallmaterial", scene);
-      wallmat.diffuseTexture = new this.BABYLON.Texture(
+      var wallmat2 = new this.BABYLON.StandardMaterial("wallmaterial", scene);
+      wallmat2.diffuseTexture = new this.BABYLON.Texture(
         "http://i.imgur.com/2b1C7UH.jpg",
         scene
       );
-
-      var frontWall = this.BABYLON.MeshBuilder.ExtrudePolygon(
-        "west",
-        {
-          shape: frontWallData,
-          depth: 0.15,
-          holes: frontWindow1Holes,
-          faceUV: frontFaceUV,
-          sideOrientation: this.BABYLON.Mesh.DOUBLESIDE 
-        },
-        scene
+    
+      var frontWall = this.BABYLON.MeshBuilder.CreatePolygon(
+        "west",{ shape: frontWall1Data,depth: 0.15,holes: frontWindow1Holes,faceUV: faceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE},scene
       );
-      frontWall.rotation.x = Math.PI / 2;
-      frontWall.position = new this.BABYLON.Vector3(0, 1, 0);
-      // frontWall.material = wallmat;
+      frontWall.rotation.x = -Math.PI / 2;
+      frontWall.position = new this.BABYLON.Vector3(0, 1, -1);
+      frontWall.material = wallmat2;
       return frontWall;
     }
+
+    //-------------------rightWall data-------------------------
     else if (wallType == EWallType.eInsideWallSimple) {
       var rightWallData = [
-        new this.BABYLON.Vector3(-5, 0, -3),
-        new this.BABYLON.Vector3(5, 0, -3),
-        new this.BABYLON.Vector3(5, 0, 2),
-        new this.BABYLON.Vector3(3.1, 0, 2),
-        new this.BABYLON.Vector3(0, 0, 2),
-        new this.BABYLON.Vector3(-5, 0, 2)
+        new this.BABYLON.Vector3(-param1, 0, -3),
+        new this.BABYLON.Vector3(param1, 0, -3),
+        new this.BABYLON.Vector3(param1, 0, 1),
+        new this.BABYLON.Vector3(3.1, 0, 1),
+        new this.BABYLON.Vector3(0, 0, 1),
+        new this.BABYLON.Vector3(-param1, 0, 1)
       ];
-      var rightFaceUV = new Array(3);
-      rightFaceUV[2] = new this.BABYLON.Vector4(7 / 15, 0, 14 / 15, 1);
-      rightFaceUV[1] = new this.BABYLON.Vector4(14 / 15, 0, 1, 1);
-      rightFaceUV[0] = new this.BABYLON.Vector4(0, 0, 7 / 15, 1);
+    
+       var rightSideFaceUV = new Array(3);
+    
+       rightSideFaceUV[2] = new this.BABYLON.Vector4(7 / 15, 0, 14 / 15, 1);
+       rightSideFaceUV[1] = new this.BABYLON.Vector4(14 / 15, 0, 1, 1);
+       rightSideFaceUV[0] = new this.BABYLON.Vector4(0, 0, 7 / 15, 1); 
 
-      var wallmat = new this.BABYLON.StandardMaterial("wallmaterial", scene);
-      wallmat.diffuseTexture = new this.BABYLON.Texture(
+      
+      var wallmat3 = new this.BABYLON.StandardMaterial("wallmaterial", scene);
+      wallmat3.diffuseTexture = new this.BABYLON.Texture(
         "http://i.imgur.com/2b1C7UH.jpg",
         scene
       );
-
-      var rightWall = this.BABYLON.MeshBuilder.ExtrudePolygon(
+    
+      var rightWall = this.BABYLON.MeshBuilder.CreatePolygon(
         "north",
-        { shape: rightWallData, depth: 0.1, faceUV: rightFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
+        { shape: rightWallData, depth: 0.1 , faceUV: rightSideFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE  },
         scene
       );
       rightWall.rotation.z = Math.PI / 2;
       rightWall.rotation.x = -Math.PI / 2;
-      rightWall.position = new this.BABYLON.Vector3(-5, 2, 5);
-      // rightWall.material = wallmat;
+      rightWall.position = new this.BABYLON.Vector3(-4.9, 1, 4.15);
+      rightWall.material = wallmat3;
       return rightWall;
-    } else if (wallType == EWallType.eOutsideWallWindow1) {
-      var leftWallData = [
-        new this.BABYLON.Vector3(-5, 0, -3),
-        new this.BABYLON.Vector3(5, 0, -3),
-        new this.BABYLON.Vector3(5, 0, 2),
-        new this.BABYLON.Vector3(3.1, 0, 2),
-        new this.BABYLON.Vector3(0, 0, 2),
-        new this.BABYLON.Vector3(-5, 0, 2)
-      ];
+    } 
 
+    //------------leftWall data with windows-----------------------
+    else if (wallType == EWallType.eOutsideWallWindow1) {
+      var leftWallData = [
+        new this.BABYLON.Vector3(-param1, 0, -3),
+        new this.BABYLON.Vector3(param1, 0, -3),
+        new this.BABYLON.Vector3(param1, 0, 1),
+        new this.BABYLON.Vector3(3.1, 0, 1),
+        new this.BABYLON.Vector3(0, 0, 1),
+        new this.BABYLON.Vector3(-param1, 0, 1)
+      ];
+    
       var sideWindowHoles = [];
       sideWindowHoles[0] = [
-        new this.BABYLON.Vector3(-4.15, 0, -1.8),
-        new this.BABYLON.Vector3(4, 0, -1.8),
-        new this.BABYLON.Vector3(4, 0, 1),
-        new this.BABYLON.Vector3(-4.15, 0, 1)
+        new this.BABYLON.Vector3(-2.15, 0, -2.3),
+        new this.BABYLON.Vector3(2, 0, -2.3),
+        new this.BABYLON.Vector3(2, 0, -0.3),
+        new this.BABYLON.Vector3(-2.15, 0, -0.3)
       ];
+    
+      var leftSideFaceUV = new Array(3);
+    
+      leftSideFaceUV[0] = new this.BABYLON.Vector4(0, 0, 7 / 15, 1);
+      leftSideFaceUV[1] = new this.BABYLON.Vector4(14 / 15, 0, 1, 1);
+      leftSideFaceUV[2] = new this.BABYLON.Vector4(7 / 15, 0, 14 / 15, 1);
 
-      var leftFaceUV = new Array(3);
-      leftFaceUV[0] = new this.BABYLON.Vector4(0, 0, 7 / 15, 1);
-      leftFaceUV[1] = new this.BABYLON.Vector4(14 / 15, 0, 1, 1);
-      leftFaceUV[2] = new this.BABYLON.Vector4(7 / 15, 0, 14 / 15, 1);
-
-      var wallmat = new this.BABYLON.StandardMaterial("wallmaterial", scene);
-      wallmat.diffuseTexture = new this.BABYLON.Texture(
+      var wallmat4 = new this.BABYLON.StandardMaterial("wallmaterial", scene);
+      wallmat4.diffuseTexture = new this.BABYLON.Texture(
         "http://i.imgur.com/2b1C7UH.jpg",
         scene
       );
-
-      var leftWall = this.BABYLON.MeshBuilder.ExtrudePolygon(
+    
+      var leftWall = this.BABYLON.MeshBuilder.CreatePolygon(
         "south",
-        {
-          shape: leftWallData,
-          depth: 0.1,
-          holes: sideWindowHoles,
-          faceUV: leftFaceUV,
-          sideOrientation: this.BABYLON.Mesh.DOUBLESIDE 
-        },
+        { shape: leftWallData, depth: 0.1,	holes: sideWindowHoles, faceUV: leftSideFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
         scene
       );
       leftWall.rotation.z = -Math.PI / 2;
       leftWall.rotation.x = -Math.PI / 2;
-      leftWall.position = new this.BABYLON.Vector3(5, 2, 5);
-      // leftWall.material = wallmat;
+      leftWall.position = new this.BABYLON.Vector3(5, 1, 4.15);
+    
+      leftWall.material = wallmat4;
       return leftWall;
-    } else if (wallType == EWallType.eFloor) {
+    } 
+    
+    //-------------------floor data-------------------
+    else if (wallType == EWallType.eFloor) {
       var firstfloorData = [
         new this.BABYLON.Vector3(-param1, 0, 0),
         new this.BABYLON.Vector3(param1, 0, 0),
@@ -177,44 +185,51 @@ export class WallFactoryService {
         new this.BABYLON.Vector3(param1, 0, 10.2),
         new this.BABYLON.Vector3(-param1, 0, 10.2)
       ];
-
+    
       var floorFaceUV = new Array(3);
+    
       floorFaceUV[0] = new this.BABYLON.Vector4(0, 0, 0.5, 1);
       floorFaceUV[2] = new this.BABYLON.Vector4(0.5, 0, 1, 1);
-
-      var floor = this.BABYLON.MeshBuilder.ExtrudePolygon(
+    
+      var floor = this.BABYLON.MeshBuilder.CreatePolygon(
         "floor",
-        { shape: firstfloorData, depth: 0.1, faceUV: floorFaceUV, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
+        {
+          shape: firstfloorData,
+          depth: 0.1,
+          faceUV: floorFaceUV,
+          sideOrientation: this.BABYLON.Mesh.DOUBLESIDE
+        },
         scene
       );
-      floor.position = new this.BABYLON.Vector3(0, -0.9, -0.1);
+      floor.position =  new this.BABYLON.Vector3(0, -2, -1);
       return floor;
-    } else {
+    } 
+    
+    //-------------------ceiling data-------------------------------
+    else {
       var ceilingData = [
         new this.BABYLON.Vector3(-param1, 0, 0),
         new this.BABYLON.Vector3(param1, 0, 0),
         new this.BABYLON.Vector3(param1, 0, 6),
         new this.BABYLON.Vector3(param1, 0, 6),
-        new this.BABYLON.Vector3(param1, 0, 10.2),
-        new this.BABYLON.Vector3(-param1, 0, 10.2)
+        new this.BABYLON.Vector3(param1, 0, 10),
+        new this.BABYLON.Vector3(-param1, 0, 10)
       ];
+     
+      var ceilingFaceUV = new Array(3);
+      ceilingFaceUV[0] = new this.BABYLON.Vector4(0, 0, 0.5, 1);
+      ceilingFaceUV[2] = new this.BABYLON.Vector4(0.5, 0, 1, 1);
 
-      var ceiling = this.BABYLON.MeshBuilder.ExtrudePolygon(
+      var ceiling = this.BABYLON.MeshBuilder.CreatePolygon(
         "ceiling",
-        { shape: ceilingData, depth: 0.1, sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
+        { shape: ceilingData, depth: 0.1, faceUV: ceilingFaceUV,  sideOrientation: this.BABYLON.Mesh.DOUBLESIDE },
         scene
       );
-      ceiling.position = new this.BABYLON.Vector3(0, 3.9, -0.1);
+      ceiling.position = new this.BABYLON.Vector3(0, 1.8, -0.9);
+    
       // ceiling.material = wallmat;
+    
       return ceiling;
-
-      var wallmat = new this.BABYLON.StandardMaterial("wallmaterial", scene);
-      wallmat.diffuseColor = new this.BABYLON.Color3(
-        240 / 255,
-        223 / 255,
-        203 / 255,
-        scene
-      );
     }
   }
 
@@ -273,7 +288,7 @@ export class WallFactoryService {
       );
       acf += frameThickness + glassWidth;
     }
-    var window = this.BABYLON.MeshBuilder.ExtrudePolygon("window", {
+    var window = this.BABYLON.MeshBuilder.CreatePolygon("window", {
       shape: windowShape,
       holes: glass,
       depth: frameDepth
@@ -338,7 +353,7 @@ export class WallFactoryService {
       );
       acf += frameThickness + glassWidth;
     }
-    var window = this.BABYLON.MeshBuilder.ExtrudePolygon("window", {
+    var window = this.BABYLON.MeshBuilder.CreatePolygon("window", {
       shape: windowShape,
       holes: glass,
       depth: frameDepth
