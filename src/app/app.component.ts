@@ -38,30 +38,45 @@ export class AppComponent implements OnInit {
     // box.rotation.y = Math.PI / 4;
     // box.position = new this.BABYLON.Vector3(1, 2, 3);
     
-    // var matrix = box.computeWorldMatrix(true);  // force calculation of world matrix
-    // var local_pos = new this.BABYLON.Vector3(0, 0.5, 0); //top middle of box relative to box
-    // local_pos.addInPlace(new this.BABYLON.Vector3(1, 1, 1)); //translate by (1, 1, 1)
-    // var global_pos = this.BABYLON.Vector3.TransformCoordinates(local_pos, matrix); //calculate world position
-    // sphere.position = global_pos; //position sphere relative to world
-    // this.showWorldAxis(scene, 20);
-
     this.roomService.getStockwerk("1.OG").subscribe(
-      stockwerk => {
-        stockwerk.raeume.forEach(room => {
+      stockwerke => {
+        stockwerke.raeume.forEach(room => {
 
-          var SPS = new this.BABYLON.SolidParticleSystem('SPS', scene);
+          var roomWidth = room.presentation.width;
+          var roomLength = room.presentation.length;
+          var roomHeight = 3;
 
-          var rearWall = this.wallFactory.createWall(scene,EWallType.eInsideWallDoor, room.presentation.length, room.presentation.width );
-          var frontWall = this.wallFactory.createWall(scene, EWallType.eOusideWallWindow2, room.presentation.length, room.presentation.width);
-          var rightWall = this.wallFactory.createWall(scene, EWallType.eInsideWallSimple, room.presentation.length, room.presentation.width );
-          var leftWall = this.wallFactory.createWall(scene, EWallType.eOutsideWallWindow1, room.presentation.length, room.presentation.width );
-          var floor = this.wallFactory.createWall(scene, EWallType.eFloor, room.presentation.length, room.presentation.width);
-          var ceiling = this.wallFactory.createWall(scene, EWallType.eCeiling, room.presentation.length, room.presentation.width );
-    
-          // var pilot = new this.BABYLON.Mesh.MergeMeshes([rearWall, frontWall, rightWall, leftWall, floor, ceiling], true, true, undefined,true);
-          // pilot.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z);
-        });
+          var eInsideWallDoor = room.presentation.walls.east;
+          var eOutsideWallWindow2 = room.presentation.walls.west;
+          var eInsideWallSimple = room. presentation.walls.north;
+          var eOutsideWallWindow1 = room.presentation.walls.south;
+          var eFloor = room.presentation.walls.floor;
+          var eCeiling = room.presentation.walls.ceiling;
+
+          var rearWall = this.wallFactory.createWall(scene, eInsideWallDoor, roomWidth, roomLength );
+          var frontWall = this.wallFactory.createWall(scene, eOutsideWallWindow2,roomWidth,roomLength);
+          var rightWall = this.wallFactory.createWall(scene, eInsideWallSimple, roomWidth, roomLength);
+          var leftWall = this.wallFactory.createWall(scene, eOutsideWallWindow1, roomWidth, roomLength);
+          var floor = this.wallFactory.createWall(scene, eFloor,roomWidth, roomLength);
+          var ceiling = this.wallFactory.createWall(scene, eCeiling, roomWidth, roomLength);
+
+
+          var mesh = this.BABYLON.Mesh.MergeMeshes([rearWall, frontWall, rightWall, leftWall, floor, ceiling], true, true, undefined, false, true);
+          mesh.position = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z);
+
+          // var pivotAt = new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z);
+          // mesh.setPivotMatrix(this.BABYLON.Matrix.Translation(pivotAt.x, pivotAt.y, pivotAt.z));
+          // mesh.position = box.getPivotPoint().clone();
+          // mesh.position(new this.BABYLON.Vector3(room.presentation.x, room.presentation.y, room.presentation.z));
         
+          // var meshPosX = room.presentation.x + roomLength/2;
+          // var meshPosY = roomHeight/2;
+          // var meshPosZ = room.presentation.y + roomWidth/2;
+
+          // console.log(`${room.nummer}: x=${meshPosX}, y=${meshPosY}, z=${meshPosZ}`);
+
+          // mesh.position = new this.BABYLON.Vector3(meshPosX, meshPosY, meshPosZ);
+        });
       },
       errors => {
         console.log(errors);

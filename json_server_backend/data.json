@@ -10,13 +10,13 @@
                     "presentation": {
                         "x":0,
                         "y":0,
-                        "length": 5,
-                        "width":2,
+                        "length": 3,
+                        "width":5,
                         "walls": {
                             "north": "eInsideWallSimple",
                             "south": "eOutsideWallWindow1",
                             "east": "eInsideWallDoor",
-                            "west": "eOusideWallWindow2",
+                            "west": "eOutsideWallWindow2",
                             "floor": "eFloor",
                             "ceiling": "eCeiling"
                         }
@@ -34,34 +34,6 @@
                     [
                         {
                             "temperatur": "21.5"
-                        }
-                    ]
-                },
-                {
-                    "nummer": "Flur",
-                    "presentation": {
-                        "x": 2, 
-                        "y": 2, 
-                        "length": 1,
-                        "width": 2,
-                        "walls": {
-                            "north": "eNone",
-                            "south": "eOutsideWallWindow1",
-                            "east": "eNone",
-                            "west": "eNone"
-                        }
-                    },
-                    "personen": [],
-                    "inventar": 
-                    [
-                        {
-                            "name": "1OG-Canon"
-                        }
-                    ],
-                    "attribute": 
-                    [
-                        {
-                            "temperatur": "18.1"
                         }
                     ]
                 }

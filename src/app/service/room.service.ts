@@ -10,10 +10,10 @@ export class RoomService {
   constructor(private httpClient: HttpClient) { }
 
   // TODO: hymoser: replace by special type - not any
-  getStockwerk(stockwerk: string) : Observable<any> {
+  getStockwerk(stockwerke: string) : Observable<any> {
 
     // TODO: hymoser: extract to helper (port/host handling etc.)
-    var url = "http://localhost:3000/stockwerke/" + stockwerk;
+    var url = "http://localhost:3000/stockwerke/" + stockwerke;
     
     return this.httpClient.get<any>(url);
   }  
